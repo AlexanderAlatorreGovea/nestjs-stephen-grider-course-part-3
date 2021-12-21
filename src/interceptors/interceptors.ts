@@ -7,14 +7,25 @@ import {
 import { map } from 'rxjs/operators';
 
 import { Observable } from 'rxjs';
+import { plainToClass } from 'class-transformer';
 
-export class SerializeInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, handler: CallHandler): Observable<unknown> {
-    console.log('context:', context);
+interface ClassConstructor {
+  new (...args: any): {};
+}
 
+export function Serialize(dto: ClassConstructor) {
+  return UseInterceptors(new SerializeInterceptor(dto));
+}
+
+class SerializeInterceptor implements NestInterceptor {
+  constructor(private dto: any) {}
+
+  intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
     return handler.handle().pipe(
-      map((data: unknown) => {
-        console.log('Im running before response is sent out', data);
+      map((data: any) => {
+        return plainToClass(this.dto, data, {
+          excludeExtraneousValues: true,
+        });
       }),
     );
   }
