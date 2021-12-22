@@ -13,9 +13,19 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "alexander@hotmail.com",
+    "email": "alexander___@hotmail.com",
     "password": "asdfasdf@"
 }
+
+### Sign in
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "alexander___@hotmail.com",
+    "password": "asdfasdf@"
+}
+
 
 
 ### Find a user with a given ID
