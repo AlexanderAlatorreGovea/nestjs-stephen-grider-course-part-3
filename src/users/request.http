@@ -14,15 +14,6 @@ POST  http://localhost:3000/auth/signout
 ### Delete a User with a given id
 DELETE  http://localhost:3000/auth/1234
 
-### Create a new User
-POST http://localhost:3000/auth/signup
-Content-Type: application/json
-
-{
-    "email": "alexander_@hotmail.com",
-    "password": "asdfasdf@"
-} 
-
 ### Sign in as an existing user
 POST http://localhost:3000/auth/signin
 Content-Type: application/json
