@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  Session,
 } from '@nestjs/common';
 import { Serialize } from 'src/interceptors/interceptors';
 import { AuthService } from './auth.service';
@@ -33,7 +34,7 @@ export class UsersController {
   signin(@Body() body: CreateUserDto) {
     const { email, password } = body;
 
-    return this.authService.signin(body.email, body.password);
+    return this.authService.signin(email, password);
   }
 
   @Get('/:id')
