@@ -12,14 +12,21 @@ describe('AuthService', () => {
     // find and create are mock the auth find and create method
     // if anyone asks for a copy of the Users's service give them a copy of
     // fake user's service
+    const users: User[] = [];
     fakeUsersService = {
-      find: () => Promise.resolve([]),
-      create: (email: string, password: string) =>
-        Promise.resolve({
-          id: 1,
+      find: (email: string) => {
+        const filteredUsers = users.filter((user) => user.email === email);
+        return Promise.resolve(filteredUsers);
+      },
+      create: (email: string, password: string) => {
+        const user = {
+          id: Math.floor(Math.random() * 999999),
           email,
           password,
-        } as User),
+        } as User;
+        users.push(user);
+        return Promise.resolve(user);
+      },
     };
 
     const module = await Test.createTestingModule({
@@ -82,12 +89,9 @@ describe('AuthService', () => {
   });
 
   it('returns a user if correct password is provided', async () => {
-    fakeUsersService.find = () =>
-      Promise.resolve([
-        { id: 1, email: 'user@domain.pl', password: 'pass' } as User,
-      ]);
+    await service.signup('asdf@asdf.com', 'mypassword');
 
-    const user = await service.signin('user@domain.pl', 'pass');
+    const user = await service.signin('asdf@asdf.com', 'mypassword');
     expect(user).toBeDefined();
   });
 });
