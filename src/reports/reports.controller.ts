@@ -3,7 +3,7 @@ import { AuthGuard } from 'src/guards/auth.grads';
 import { Serialize } from 'src/interceptors/interceptors';
 import { CurrentUser } from 'src/users/decorators/current-user.decorator';
 import { User } from 'src/users/user.entity';
-import { CreateReportDto } from './dtos/CreateReportDto';
+import { CreateReportDto } from './dtos/create-report-dto';
 import { ReportDto } from './dtos/report.dto';
 import { ReportsService } from './reports.service';
 
