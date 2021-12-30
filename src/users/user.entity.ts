@@ -11,15 +11,19 @@ import {
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn() 
   id: number;
 
   @Column()
   password: string;
 
+  
   @OneToMany(() => Report, (report) => report.user)
   reports: Report[];
-
+  
+  @Column({ default: true })
+  admin: boolean;
+  
   @Column()
   email: string;
 
