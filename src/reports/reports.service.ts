@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/user.entity';
 import { Repository } from 'typeorm';
+import { BaseReportDto } from './dtos/base-report.dto';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { GetEstimateDto } from './dtos/get-estimate.dto';
 import { Report } from './report.entity';
@@ -26,12 +27,12 @@ export class ReportsService {
       .getRawOne();
   }
 
-  getByModel({ model }) {
-    console.log(model)
+  getByModel({ make }) {
+    console.log(make);
     return this.repo
       .createQueryBuilder()
       .select('*')
-      .where('model = :model', { model })
+      .where('make = :make', { make })
       .limit(3)
       .getRawMany();
   }
