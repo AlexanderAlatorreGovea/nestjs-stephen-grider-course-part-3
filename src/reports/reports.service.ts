@@ -26,6 +26,16 @@ export class ReportsService {
       .getRawOne();
   }
 
+  getByModel({ model }) {
+    console.log(model)
+    return this.repo
+      .createQueryBuilder()
+      .select('*')
+      .where('model = :model', { model })
+      .limit(3)
+      .getRawMany();
+  }
+
   create(reportDto: CreateReportDto, user: User) {
     const report = this.repo.create(reportDto);
     report.user = user;

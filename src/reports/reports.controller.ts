@@ -14,6 +14,7 @@ import { Serialize } from 'src/interceptors/interceptors';
 import { CurrentUser } from 'src/users/decorators/current-user.decorator';
 import { User } from 'src/users/user.entity';
 import { ApproveReportDto } from './dtos/approvre-report.dto';
+import { BaseReportDto } from './dtos/base-report.dto';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { GetEstimateDto } from './dtos/get-estimate.dto';
 import { ReportDto } from './dtos/report.dto';
@@ -26,6 +27,11 @@ export class ReportsController {
   @Get()
   getEstimate(@Query() query: GetEstimateDto) {
     return this.reportService.createEstimate(query);
+  }
+
+  @Get()
+  getVehiclesByModel(@Query() query: BaseReportDto) {
+    return this.reportService.getByModel(query);
   }
 
   @Post()
