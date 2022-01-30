@@ -28,7 +28,6 @@ export class ReportsService {
   }
 
   getByModel({ make }) {
-    console.log(make);
     return this.repo
       .createQueryBuilder()
       .select('*')
