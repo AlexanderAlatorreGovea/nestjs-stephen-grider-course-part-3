@@ -1,1 +1,1 @@
-Course by Stephen Grider (nestJs).
+Course by Stephen Grider.
